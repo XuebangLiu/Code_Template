@@ -1,0 +1,87 @@
+# Batch downloading multiple variables and preprocessing (resampling) CMIP6 daily data based on ESMValTool.
+# ESMValTool
+# recipe_example_r.yml
+---
+documentation:
+  description: |
+    Recipe for download CMIP6 model data.
+
+  title: Recipe that runs an example diagnostic written in Python.
+
+  authors:
+    - arnone_enrico 
+
+  maintainer:
+    - andela_bouwe
+
+datasets:
+  # - {dataset: ACCESS-CM2, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: '*'}
+  - {dataset: MPI-ESM1-2-LR, project: CMIP6, exp: ssp245, ensemble: r1i1p1f1, grid: '*'}
+  - {dataset: MPI-ESM1-2-LR, project: CMIP6, exp: ssp585, ensemble: r1i1p1f1, grid: '*'}
+
+
+preprocessors:
+  regrid_preprocessor:
+    regrid:
+      scheme: linear
+      target_grid: 2.5x2.5
+
+diagnostics:
+  download_only:
+    description: Diagnostic parameters to trigger data download.
+    variables:
+      tas:
+        mip: day
+        preprocessor: regrid_preprocessor
+        timerange: 2015/2100
+      tasmin:
+        mip: day
+        preprocessor: regrid_preprocessor
+        timerange: 2015/2100
+      tasmax:
+        mip: day
+        preprocessor: regrid_preprocessor
+        timerange: 2015/2100
+      pr:
+        mip: day
+        preprocessor: regrid_preprocessor
+        timerange: 2015/2100
+      uas:
+        mip: day
+        preprocessor: regrid_preprocessor
+        timerange: 2015/2100
+      vas:
+        mip: day
+        preprocessor: regrid_preprocessor
+        timerange: 2015/2100
+      hursmax:
+        mip: day
+        preprocessor: regrid_preprocessor
+        timerange: 2015/2100
+      hursmin:
+        mip: day
+        preprocessor: regrid_preprocessor
+        timerange: 2015/2100
+      rlds:
+        mip: day
+        preprocessor: regrid_preprocessor
+        timerange: 2015/2100
+      rlus:
+        mip: day
+        preprocessor: regrid_preprocessor
+        timerange: 2015/2100   
+      rsds:
+        mip: day
+        preprocessor: regrid_preprocessor
+        timerange: 2015/2100
+      rsus:
+        mip: day
+        preprocessor: regrid_preprocessor
+        timerange: 2015/2100     
+      psl:
+        mip: day
+        preprocessor: regrid_preprocessor
+        timerange: 2015/2100
+    scripts:
+      dummy_script: 
+        script: /home/xliu/CMIP6_download/dummy_script.py
